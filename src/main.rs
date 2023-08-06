@@ -1,6 +1,7 @@
-use std::io;
-use rand::Rng;
 
+
+use std::io::stdin;//use std::io;
+use rand::Rng;
 
 fn main() {
     println!("Hello, world!");
@@ -94,17 +95,23 @@ fn main() {
     loop{
         println!("Please guess a number:");
         let mut guess: String=String::new();
-        io::stdin() Stdin
-            .read_line(buf:(&mut guess)) Result(usize, Error)
-            .expect(msg:"failed to read the line");
+        //io::stdin() Stdin
+        //    .read_line(buf:&mut guess) Result<usize, Error>
+        //    .expect(msg:"failed to read the line");
+        stdin().read_line(&mut guess).expect("failed to read the line");
 
-        let guess:u32=match guess.trim().parse(){
-            Ok(num: u32) => num,
-            Err(_)=>continue,
+        //let guess: u32 = match guess.trim().parse(){
+        //    Ok(num: u32) => num,
+        //    Err(_) => continue,
+        //};
+        let guess: u32 = match guess.trim().parse(){
+            Ok(num) => num,
+            Err(_) => continue,
         };
-        println!("Your guessed:{}".guess);
+        println!("Your guessed:{}",guess);
         if guess>secret_number{
             println!("too big!");
+        }
         else if guess<secret_number {
             println!("too small!");
         }
@@ -112,7 +119,7 @@ fn main() {
             println!("correct!");
             break;
         }
-
+    }
 }
 
 
