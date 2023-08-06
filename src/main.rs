@@ -9,9 +9,9 @@ fn main() {
     //vvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     //|| Variable and Data Types ||
     //^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    //
+    
     // mut : imutable or value changable 
-    //
+    
     let mut a:i32=3;
     println!("a value:{}",a);
     a=5;
@@ -100,12 +100,17 @@ fn main() {
         //    .expect(msg:"failed to read the line");
         stdin().read_line(&mut guess).expect("failed to read the line");
 
+        //Check if guess = no then skip entire loop!
+        //Q: Why this checking need to be below stdin()...;
+        if guess.trim()=="no"{
+            break;
+        }
         //let guess: u32 = match guess.trim().parse(){
         //    Ok(num: u32) => num,
         //    Err(_) => continue,
         //};
         let guess: u32 = match guess.trim().parse(){
-            Ok(num) => num,
+            Ok(u32) => u32,
             Err(_) => continue,
         };
         println!("Your guessed:{}",guess);
@@ -120,6 +125,39 @@ fn main() {
             break;
         }
     }
+    
+    //vvvvvvvvvv
+    //|| Loop ||
+    //^^^^^^^^^^
+
+    //loop
+    let mut loop1=0;
+    loop{
+        if loop1 > 10{
+            break;
+        } 
+        else {
+            println!("{}",loop1);
+            loop1=loop1+1;
+        }
+    }
+
+    //while
+    let mut loop2=0;
+    while loop2<=10{
+        println!("{}",loop2);
+        loop2+=1;
+    }
+
+    //for
+    let numarr_tmp1=[10,20,30,40,50];
+    for loop3 in 0..numarr_tmp1.len(){
+        println!("{}",numarr_tmp1[loop3]);
+    }
+
+    //stack memory: u8, i8, float
+    //heep memory: strings,vector, etc
+
 }
 
 
