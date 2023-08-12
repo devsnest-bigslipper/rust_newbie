@@ -100,7 +100,7 @@ fn main() {
         //    .expect(msg:"failed to read the line");
         stdin().read_line(&mut guess).expect("failed to read the line");
 
-        //Check if guess = no then skip entire loop!
+        //Check if guess equal to "no" then skip entire loop!
         //Q: Why this checking need to be below stdin()...;
         if guess.trim()=="no"{
             break;
@@ -109,8 +109,8 @@ fn main() {
         //    Ok(num: u32) => num,
         //    Err(_) => continue,
         //};
-        let guess: u32 = match guess.trim().parse(){
-            Ok(u32) => u32,
+        let guess: u32 = match guess.trim().parse::<u32>(){
+            Ok(num) => num,
             Err(_) => continue,
         };
         println!("Your guessed:{}",guess);
@@ -155,8 +155,73 @@ fn main() {
         println!("{}",numarr_tmp1[loop3]);
     }
 
+
+    //vvvvvvvvvvvvvvv
+    //|| Ownership ||
+    //^^^^^^^^^^^^^^^
+    //rust has some kind of memory control?
+    //other programing language may manually allocate or free memory.
+    //or do some garbage collection for dealing with no-longer-used memory.
+
+    //Two types of memory?
     //stack memory: u8, i8, float
     //heep memory: strings,vector, etc
+    
+
+    //Examples:
+    //let mut a:u8=10; // already know the size of the data in stack memory
+    //let mut a=String::from("aman"); //dont know the size of the data so it's 
+    //stored in the heap memory.
+
+    //Q:data will be released after a scope? 
+    //{   //scope in
+    //    let mut a=0; 
+    //}   //scope out
+    //println!("{}",a); //ERROR
+
+    let str1=String::from("hello");//in stack mem?
+    //Q:What's the difference with : let str1="hello";?
+    let str2=str1.clone(); //point to different heap mem?
+    //let str2=str1; //This will pass the data to str2.
+    //so we will get ERROR when we print the str1 value.
+    //let str2=&str1; //This will point str2 to the same mem of str1's data
+    //Similar to the situation that we use different variable name and passing value
+    //to a function. To fix that we use functionname(str1.clone())
+    println!("{}",str1);
+    println!("{}",str2);
+
+    //let len=caluclate_length(&s1); //only passing address not passing value to a func.
+    //fn calculate_length(s:&String) -> usize{
+    //    s.len(); //Q: Don't need to use return in rust?
+    //}
+   
+    //SLICING
+    let str3=String::from("hello world");
+    let hello=&str3[6..11]; //or &str3[0..len] for all the string;
+    println!("Only print {} in hello world string",hello);
+
+
+    //STRUCTURE (similar to class in OOP languages?)
+    //
+    //#[derive(Debug)] //This attribute for print the values in user1
+    //Q:What is attribute?
+    //struct User{
+    //  active: bool,
+    //  username: String,
+    //  email: String,
+    //  sign_in_count:u64,
+    //}
+    //fn main(){
+    //  let user1=User{
+    //    active:true,
+    //    username:String::from("aman"),
+    //    email:String::from("aman@gmail.com"),
+    //    sign_in_count:1,
+    //  }
+    //  println!("{:?}",user1); //Q:what's the specifier :? in {}
+    //}
+    
+    //
 
 }
 
